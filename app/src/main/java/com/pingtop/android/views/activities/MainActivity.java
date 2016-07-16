@@ -1,27 +1,27 @@
-package com.pingtop.android;
+package com.pingtop.android.views.activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
+import com.pingtop.android.R;
 import com.pingtop.android.adapter.MainPaggerAdapter;
 import com.pingtop.android.base.BaseActivity;
 import com.pingtop.android.base.BaseApplication;
-import com.pingtop.android.entities.PageItem;
 import com.pingtop.android.injector.component.ActivityComponent;
 import com.pingtop.android.injector.component.DaggerActivityComponent;
 import com.pingtop.android.injector.module.ActivityModule;
 import com.pingtop.android.interfaces.IMainView;
 import com.pingtop.android.presenter.impl.MainPresenter;
-
-import java.util.ArrayList;
+import com.pingtop.android.views.fragments.main.ZoneFragment;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements IMainView {
+public class MainActivity extends BaseActivity implements IMainView,ZoneFragment.OnFragmentInteractionListener {
 
     @Inject
     MainPresenter mMainPresenter;
@@ -52,8 +52,7 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        ArrayList<PageItem> pageItems = new ArrayList<>();
-        new MainPaggerAdapter(getSupportFragmentManager(), pageItems);
+        mMainPresenter.initPageData();
         mTabMain.setupWithViewPager(mViewPager);
     }
 
@@ -65,6 +64,11 @@ public class MainActivity extends BaseActivity implements IMainView {
     @Override
     public void showSnackBarMsg(String msg) {
 
+    }
+
+    @Override
+    public void setPaggerAdapter(MainPaggerAdapter mainPaggerAdapter) {
+        mViewPager.setAdapter(mainPaggerAdapter);
     }
 
 }

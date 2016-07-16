@@ -3,6 +3,7 @@ package com.pingtop.android.interfaces;
 
 import android.support.annotation.StringRes;
 
+import com.pingtop.android.adapter.MainPaggerAdapter;
 import com.pingtop.android.base.IView;
 
 /**
@@ -13,4 +14,5 @@ public interface IMainView extends IView {
 
     void showSnackBarMsg(String msg);
 
+    void setPaggerAdapter(MainPaggerAdapter mainPaggerAdapter);
 }
