@@ -1,7 +1,10 @@
 package com.pingtop.android.views.activities;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
+import android.view.WindowManager;
 
 import com.pingtop.android.R;
 import com.pingtop.android.base.BaseActivity;
@@ -21,7 +24,7 @@ public class SplashActivity extends BaseActivity implements ISplashView {
 
     @Override
     protected void initializePresenter() {
-
+        mSplashPresenter.attachView(this);
     }
 
     @Override
@@ -40,7 +43,16 @@ public class SplashActivity extends BaseActivity implements ISplashView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        initWindow();
+        mSplashPresenter.onCreate(savedInstanceState);
+    }
 
+    @TargetApi(19)
+    private void initWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
     }
 
     @Override

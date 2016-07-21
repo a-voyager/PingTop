@@ -1,12 +1,17 @@
 package com.pingtop.android.presenter.impl;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
 import com.pingtop.android.base.IView;
 import com.pingtop.android.injector.scrope.ContextLifeCycle;
 import com.pingtop.android.interfaces.ISplashView;
 import com.pingtop.android.presenter.IPresenter;
+import com.pingtop.android.views.activities.MainActivity;
 
 import javax.inject.Inject;
 
@@ -14,8 +19,12 @@ import javax.inject.Inject;
  * Created by wuhaojie on 2016/7/21 9:14.
  */
 public class SplashPresenter implements IPresenter {
+    public static final int DELAY_MILLIS = 2000;
     private Context mContext;
     private ISplashView mSplashView;
+
+    private static final int HANDLER_TO_MAIN_ACTIVITY = 0;
+
 
     @Inject
     public SplashPresenter(@ContextLifeCycle("Activity") Context context) {
@@ -24,8 +33,23 @@ public class SplashPresenter implements IPresenter {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+        mHandler.sendEmptyMessageDelayed(HANDLER_TO_MAIN_ACTIVITY, DELAY_MILLIS);
     }
+
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case HANDLER_TO_MAIN_ACTIVITY:
+                    Intent intent = new Intent(mContext, MainActivity.class);
+                    mContext.startActivity(intent);
+                    ((Activity) mContext).finish();
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onResume() {
