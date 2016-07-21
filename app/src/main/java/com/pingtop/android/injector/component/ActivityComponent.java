@@ -9,6 +9,7 @@ import com.pingtop.android.views.activities.MainActivity;
 import com.pingtop.android.injector.module.ActivityModule;
 import com.pingtop.android.injector.scrope.ActivityScope;
 import com.pingtop.android.injector.scrope.ContextLifeCycle;
+import com.pingtop.android.views.activities.SplashActivity;
 
 import dagger.Component;
 
@@ -22,6 +23,8 @@ public interface ActivityComponent {
     void inject(MainActivity activity);
 
     void inject(LoginActivity activity);
+
+    void inject(SplashActivity activity);
 
     Activity activity();
 
