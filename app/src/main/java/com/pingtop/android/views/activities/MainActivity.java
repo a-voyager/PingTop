@@ -11,6 +11,7 @@ import com.pingtop.android.R;
 import com.pingtop.android.adapter.MainPaggerAdapter;
 import com.pingtop.android.base.BaseActivity;
 import com.pingtop.android.base.BaseApplication;
+import com.pingtop.android.entities.global.UserEntity;
 import com.pingtop.android.injector.component.ActivityComponent;
 import com.pingtop.android.injector.component.DaggerActivityComponent;
 import com.pingtop.android.injector.module.ActivityModule;
@@ -18,6 +19,10 @@ import com.pingtop.android.interfaces.IMainView;
 import com.pingtop.android.presenter.impl.MainPresenter;
 import com.pingtop.android.utils.SnackBarUtils;
 import com.pingtop.android.views.fragments.main.ZoneFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -58,6 +63,7 @@ public class MainActivity extends BaseActivity implements IMainView, ZoneFragmen
     public void initViews(Bundle savedInstanceState) {
         mMainPresenter.initPageData();
         mTabMain.setupWithViewPager(mViewPager);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -100,4 +106,26 @@ public class MainActivity extends BaseActivity implements IMainView, ZoneFragmen
         mMainPresenter.clickZoneMessage();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mMainPresenter.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMainPresenter.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void loginResult(UserEntity userEntity) {
+        if (userEntity != null) {
+            // TODO: 2016/7/21 登录成功
+            showSnackBarMsg("main presenter get");
+        } else {
+
+        }
+    }
 }

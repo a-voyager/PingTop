@@ -1,17 +1,24 @@
 package com.pingtop.android.presenter.impl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.pingtop.android.adapter.MainPaggerAdapter;
 import com.pingtop.android.base.IView;
 import com.pingtop.android.entities.PageItem;
+import com.pingtop.android.entities.global.UserEntity;
 import com.pingtop.android.injector.scrope.ContextLifeCycle;
 import com.pingtop.android.interfaces.IMainView;
 import com.pingtop.android.manager.PageDataFactory;
+import com.pingtop.android.manager.UserInfoManager;
 import com.pingtop.android.presenter.IPresenter;
+import com.pingtop.android.views.activities.LoginActivity;
 import com.pingtop.android.views.activities.MainActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -38,7 +45,6 @@ public class MainPresenter implements IPresenter {
 
     @Override
     public void onResume() {
-
     }
 
     @Override
@@ -53,7 +59,6 @@ public class MainPresenter implements IPresenter {
 
     @Override
     public void onStop() {
-
     }
 
     @Override
@@ -74,7 +79,13 @@ public class MainPresenter implements IPresenter {
 
     public void clickAvatar(View v) {
         // TODO: 2016/7/21 判断是否登录 并处理点击头像请求
-        mIMainView.showSnackBarMsg("测试");
+//        mIMainView.showSnackBarMsg("测试");
+        if (UserInfoManager.isLogined()) {
+
+        } else {
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            mContext.startActivity(intent);
+        }
     }
 
     public void clickZoneMessage() {
@@ -91,4 +102,7 @@ public class MainPresenter implements IPresenter {
         mIMainView.showSnackBarMsg("收藏");
 
     }
+
+
+
 }
