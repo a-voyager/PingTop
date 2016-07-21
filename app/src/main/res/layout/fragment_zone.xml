@@ -7,21 +7,30 @@
     tools:context="com.pingtop.android.views.fragments.main.ZoneFragment">
 
 
-    <ImageView
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp"
-        android:src="@mipmap/ic_launcher"/>
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:text="请先登录"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"/>
+        android:layout_marginTop="32dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="请先登录"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
 
 
     <ListView

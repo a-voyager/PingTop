@@ -2,6 +2,7 @@ package com.pingtop.android.presenter.impl;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import com.pingtop.android.views.activities.MainActivity;
 import com.pingtop.android.adapter.MainPaggerAdapter;
@@ -71,4 +72,23 @@ public class MainPresenter implements IPresenter {
         mIMainView.setPagerAdapter(mainPaggerAdapter);
     }
 
+    public void clickAvatar(View v) {
+        // TODO: 2016/7/21 判断是否登录 并处理点击头像请求
+        mIMainView.showSnackBarMsg("测试");
+    }
+
+    public void clickZoneMessage() {
+        // TODO: 2016/7/21 判断是否登录 跳转到消息中心
+        mIMainView.showSnackBarMsg("消息中心");
+    }
+
+    public void clickZoneRoute() {
+        mIMainView.showSnackBarMsg("路径");
+
+    }
+
+    public void clickZoneFavorite() {
+        mIMainView.showSnackBarMsg("收藏");
+
+    }
 }

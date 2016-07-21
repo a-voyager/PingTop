@@ -6,15 +6,28 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.pingtop.android.R;
 import com.pingtop.android.adapter.ZoneListAdapter;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class ZoneFragment extends Fragment {
     // TODO: 修改为需要传递进来的参数键
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @OnClick(R.id.ll_me)
+    void onClick(View view) {
+        mListener.clickZoneAvatar(view);
+    }
+
+    @BindView(R.id.lv_zone)
+    ListView mLvZone;
 
     // TODO: 重命名为传进来的参数成员变量
     private String mParam1;
@@ -26,14 +39,6 @@ public class ZoneFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ZoneFragment.
-     */
     // TODO: 重命名参数
     public static ZoneFragment newInstance(String param1, String param2) {
         ZoneFragment fragment = new ZoneFragment();
@@ -56,11 +61,30 @@ public class ZoneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_zone, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.lv_zone);
-        listView.setAdapter(new ZoneListAdapter(getActivity()));
+        ButterKnife.bind(this, view);
+        initViews();
         return view;
+    }
+
+    private void initViews() {
+        mLvZone.setAdapter(new ZoneListAdapter(getActivity()));
+        mLvZone.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        mListener.clickZoneFavorite();
+                        break;
+                    case 1:
+                        mListener.clickZoneRoute();
+                        break;
+                    case 2:
+                        mListener.clickZoneMessage();
+                        break;
+                }
+            }
+        });
     }
 
 
@@ -73,6 +97,7 @@ public class ZoneFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
     }
 
     @Override
@@ -85,6 +110,12 @@ public class ZoneFragment extends Fragment {
      * 与Activity交互的接口
      */
     public interface OnFragmentInteractionListener {
-//        void onFragmentInteraction(Uri uri);
+        void clickZoneAvatar(View v);
+
+        void clickZoneFavorite();
+
+        void clickZoneRoute();
+
+        void clickZoneMessage();
     }
 }
