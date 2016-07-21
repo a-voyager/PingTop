@@ -1,6 +1,5 @@
 package com.pingtop.android.views.activities;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.TabLayout;
@@ -67,7 +66,7 @@ public class MainActivity extends BaseActivity implements IMainView,ZoneFragment
     }
 
     @Override
-    public void setPaggerAdapter(MainPaggerAdapter mainPaggerAdapter) {
+    public void setPagerAdapter(MainPaggerAdapter mainPaggerAdapter) {
         mViewPager.setAdapter(mainPaggerAdapter);
     }
 

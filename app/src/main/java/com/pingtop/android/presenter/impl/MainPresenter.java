@@ -68,7 +68,7 @@ public class MainPresenter implements IPresenter {
     public void initPageData() {
         List<PageItem> pageItems = PageDataFactory.createPages(mContext);
         MainPaggerAdapter mainPaggerAdapter = new MainPaggerAdapter(((MainActivity) mContext).getSupportFragmentManager(), pageItems);
-        mIMainView.setPaggerAdapter(mainPaggerAdapter);
+        mIMainView.setPagerAdapter(mainPaggerAdapter);
     }
 
 }
