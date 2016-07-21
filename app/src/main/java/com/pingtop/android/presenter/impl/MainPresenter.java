@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.pingtop.android.views.activities.MainActivity;
 import com.pingtop.android.adapter.MainPaggerAdapter;
 import com.pingtop.android.base.IView;
 import com.pingtop.android.entities.PageItem;
@@ -12,6 +11,7 @@ import com.pingtop.android.injector.scrope.ContextLifeCycle;
 import com.pingtop.android.interfaces.IMainView;
 import com.pingtop.android.manager.PageDataFactory;
 import com.pingtop.android.presenter.IPresenter;
+import com.pingtop.android.views.activities.MainActivity;
 
 import java.util.List;
 
