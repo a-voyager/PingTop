@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.pingtop.android.R;
+import com.pingtop.android.adapter.ZoneListAdapter;
 
 public class ZoneFragment extends Fragment {
     // TODO: 修改为需要传递进来的参数键
@@ -55,7 +57,10 @@ public class ZoneFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_zone, container, false);
+        View view = inflater.inflate(R.layout.fragment_zone, container, false);
+        ListView listView = (ListView) view.findViewById(R.id.lv_zone);
+        listView.setAdapter(new ZoneListAdapter(getActivity()));
+        return view;
     }
 
 
