@@ -13,7 +13,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by wuhaojie on 2016/7/21 21:18.
  */
-public class HttpHelper {
+class HttpHelper {
 
 
     public static final String BASE_URL = "http://115.28.0.251:8088";

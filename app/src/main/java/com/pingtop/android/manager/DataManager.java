@@ -29,4 +29,9 @@ public class DataManager {
         return SingletonHolder.PREFERENCE_HELPER;
     }
 
+    public static DataBaseProvider getDataBaseProvider(Context context) {
+        return DataBaseProvider.getInstance(context);
+    }
+
+
 }

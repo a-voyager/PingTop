@@ -5,6 +5,8 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.pingtop.android.R;
@@ -127,5 +129,22 @@ public class MainActivity extends BaseActivity implements IMainView, ZoneFragmen
         } else {
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_city:
+                break;
+            case R.id.action_search:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
