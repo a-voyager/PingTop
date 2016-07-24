@@ -5,6 +5,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -55,11 +56,9 @@ public class CityChoiceActivity extends BaseActivity implements ICityChoiceView 
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        if(getSupportActionBar()!=null){
-            getSupportActionBar().setTitle("选择省份");
-        }
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRvCity.setLayoutManager(new LinearLayoutManager(this));
-        mRvCity.setHasFixedSize(true);
         mCityChoicePresenter.onCreate(savedInstanceState);
     }
 
@@ -80,12 +79,30 @@ public class CityChoiceActivity extends BaseActivity implements ICityChoiceView 
 
     @Override
     public void hideProgressBar() {
-        mPbBg.setVisibility(View.VISIBLE);
+        mPbBg.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showProgressBar() {
-        mPbBg.setVisibility(View.INVISIBLE);
+        mPbBg.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void refreshAdapter() {
+        mRvCity.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void setToolBarTitle(String s) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(s);
+        }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) finish();
+        return super.onOptionsItemSelected(item);
+    }
 }

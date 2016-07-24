@@ -12,4 +12,8 @@ public interface ICityChoiceView extends IView {
     void hideProgressBar();
 
     void showProgressBar();
+
+    void refreshAdapter();
+
+    void setToolBarTitle(String s);
 }

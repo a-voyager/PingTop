@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.pingtop.android.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,7 +21,7 @@ public class CityListAdapter extends RecyclerView.Adapter {
 
 
     private Context mContext;
-    private List<String> mList = new ArrayList<>();
+    private List<String> mList;
 
     public CityListAdapter(Context context) {
         mContext = context;
@@ -39,7 +38,7 @@ public class CityListAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_city, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_city, parent, false);
         return new Holder(view);
     }
 

@@ -3,8 +3,6 @@ package com.pingtop.android.presenter.impl;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.pingtop.android.adapter.list.CityListAdapter;
 import com.pingtop.android.base.IView;
@@ -23,6 +21,9 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Func0;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -31,6 +32,8 @@ import rx.schedulers.Schedulers;
 public class CityChoicePresenter implements IPresenter {
     private Context mContext;
     private ICityChoiceView mCityChoiceView;
+    private List<ProvinceEntity> mProvinceInfo;
+    private List<String> mDatas = new ArrayList<>();
 
     @Inject
     public CityChoicePresenter(@ContextLifeCycle("Activity") Context context) {
@@ -40,33 +43,47 @@ public class CityChoicePresenter implements IPresenter {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.e("test>>", "onCreate()");
-        final CityListAdapter cityListAdapter = new CityListAdapter(mContext);
+        CityListAdapter cityListAdapter = new CityListAdapter(mContext, mDatas);
         mCityChoiceView.setAdapter(cityListAdapter);
 
-        Observable.create(new Observable.OnSubscribe<ArrayList<String>>() {
-            @Override
-            public void call(Subscriber<? super ArrayList<String>> subscriber) {
-                subscriber.onStart();
-                ArrayList<String> list = queryProvinces();
-                subscriber.onNext(list);
-                subscriber.onCompleted();
-            }
-        }).observeOn(Schedulers.io())
+        queryProvinces();
+    }
+
+    private void queryProvinces() {
+        mCityChoiceView.showProgressBar();
+        mCityChoiceView.setToolBarTitle("选择省份");
+
+        Observable
+                .defer(new Func0<Observable<ProvinceEntity>>() {
+                    @Override
+                    public Observable<ProvinceEntity> call() {
+                        if (mProvinceInfo == null || mProvinceInfo.isEmpty()) {
+                            SQLiteDatabase cityDataBase = DataManager.getDataBaseProvider(mContext).getCityDataBase();
+                            mProvinceInfo = DataDaoUtils.getProvinceInfo(cityDataBase);
+                        }
+                        return Observable.from(mProvinceInfo);
+                    }
+                })
+                .map(new Func1<ProvinceEntity, String>() {
+                    @Override
+                    public String call(ProvinceEntity provinceEntity) {
+                        return provinceEntity.getProName();
+                    }
+                })
+                .toList()
+                .doOnTerminate(new Action0() {
+                    @Override
+                    public void call() {
+                        mCityChoiceView.hideProgressBar();
+                    }
+                })
+                .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ArrayList<String>>() {
-
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-
-                        mCityChoiceView.showProgressBar();
-                    }
-
+                .subscribe(new Subscriber<List<String>>() {
                     @Override
                     public void onCompleted() {
-                        mCityChoiceView.hideProgressBar();
+
                     }
 
                     @Override
@@ -75,22 +92,12 @@ public class CityChoicePresenter implements IPresenter {
                     }
 
                     @Override
-                    public void onNext(ArrayList<String> strings) {
-                        cityListAdapter.setList(strings);
-                        cityListAdapter.notifyDataSetChanged();
+                    public void onNext(List<String> strings) {
+                        mDatas.addAll(strings);
+                        mCityChoiceView.refreshAdapter();
                     }
                 });
-    }
 
-    @NonNull
-    private ArrayList<String> queryProvinces() {
-        SQLiteDatabase cityDataBase = DataManager.getDataBaseProvider(mContext).getCityDataBase();
-        List<ProvinceEntity> provinceInfo = DataDaoUtils.getProvinceInfo(cityDataBase);
-        ArrayList<String> list = new ArrayList<>();
-        for (ProvinceEntity entity : provinceInfo) {
-            list.add(entity.getProName());
-        }
-        return list;
     }
 
     @Override
