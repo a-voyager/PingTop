@@ -42,6 +42,7 @@ public class CityChoicePresenter implements IPresenter {
     private List<CityEntity> mCityInfo;
     private CityListAdapter mCityListAdapter;
     private STATE mCurrState;
+    private SQLiteDatabase mCityDataBase;
 
     public void onBackPressed() {
         if (mCurrState == STATE.PROVINCE)
@@ -63,6 +64,8 @@ public class CityChoicePresenter implements IPresenter {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (mCityDataBase == null)
+            mCityDataBase = DataManager.getDataBaseProvider(mContext).getCityDataBase();
         mCityListAdapter = new CityListAdapter(mContext, mDatas);
         mCityChoiceView.setAdapter(mCityListAdapter);
         mCityListAdapter.setOnClickItemListener((v, p) -> {
@@ -90,8 +93,7 @@ public class CityChoicePresenter implements IPresenter {
                     @Override
                     public Observable<ProvinceEntity> call() {
                         if (mProvinceInfo == null || mProvinceInfo.isEmpty()) {
-                            SQLiteDatabase cityDataBase = DataManager.getDataBaseProvider(mContext).getCityDataBase();
-                            mProvinceInfo = DataDaoUtils.getProvinceInfo(cityDataBase);
+                            mProvinceInfo = DataDaoUtils.getProvinceInfo(mCityDataBase);
                         }
                         return Observable.from(mProvinceInfo);
                     }
@@ -150,8 +152,7 @@ public class CityChoicePresenter implements IPresenter {
                     @Override
                     public Observable<CityEntity> call() {
                         // whether if it is empty
-                        SQLiteDatabase cityDataBase = DataManager.getDataBaseProvider(mContext).getCityDataBase();
-                        mCityInfo = DataDaoUtils.getCityInfo(cityDataBase, id);
+                        mCityInfo = DataDaoUtils.getCityInfo(mCityDataBase, id);
                         return Observable.from(mCityInfo);
                     }
                 })
