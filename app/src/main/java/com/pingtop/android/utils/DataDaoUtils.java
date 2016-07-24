@@ -28,7 +28,6 @@ public class DataDaoUtils {
         return provinceEntities;
     }
 
-    // TODO: 2016/7/24 增加城市信息
 
     public static List<CityEntity> getCityInfo(SQLiteDatabase database, int proId) {
         List<CityEntity> cityEntities = new ArrayList<>();

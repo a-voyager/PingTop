@@ -1,4 +1,4 @@
-package com.pingtop.android.adapter;
+package com.pingtop.android.adapter.list;
 
 import android.content.Context;
 import android.view.LayoutInflater;

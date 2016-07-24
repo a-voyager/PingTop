@@ -139,12 +139,7 @@ public class MainActivity extends BaseActivity implements IMainView, ZoneFragmen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_city:
-                break;
-            case R.id.action_search:
-                break;
-        }
+        mMainPresenter.onOptionsItemSelected(item);
         return super.onOptionsItemSelected(item);
     }
 }

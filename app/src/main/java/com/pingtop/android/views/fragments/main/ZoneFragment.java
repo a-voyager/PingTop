@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.pingtop.android.R;
-import com.pingtop.android.adapter.ZoneListAdapter;
+import com.pingtop.android.adapter.list.ZoneListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

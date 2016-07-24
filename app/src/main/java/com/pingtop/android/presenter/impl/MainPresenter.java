@@ -3,22 +3,21 @@ package com.pingtop.android.presenter.impl;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.pingtop.android.R;
 import com.pingtop.android.adapter.MainPaggerAdapter;
 import com.pingtop.android.base.IView;
 import com.pingtop.android.entities.PageItem;
-import com.pingtop.android.entities.global.UserEntity;
 import com.pingtop.android.injector.scrope.ContextLifeCycle;
 import com.pingtop.android.interfaces.IMainView;
 import com.pingtop.android.manager.PageDataFactory;
 import com.pingtop.android.manager.UserInfoManager;
 import com.pingtop.android.presenter.IPresenter;
+import com.pingtop.android.views.activities.CityChoiceActivity;
 import com.pingtop.android.views.activities.LoginActivity;
 import com.pingtop.android.views.activities.MainActivity;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -104,5 +103,14 @@ public class MainPresenter implements IPresenter {
     }
 
 
-
+    public void onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_city:
+                Intent intent = new Intent(mContext, CityChoiceActivity.class);
+                mContext.startActivity(intent);
+                break;
+            case R.id.action_search:
+                break;
+        }
+    }
 }
