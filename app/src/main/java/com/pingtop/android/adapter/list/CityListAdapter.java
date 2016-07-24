@@ -38,6 +38,7 @@ public class CityListAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // http://stackoverflow.com/questions/24503760/cardview-layout-width-match-parent-does-not-match-parent-recyclerview-width
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_city, parent, false);
         return new Holder(view);
     }
@@ -53,6 +54,16 @@ public class CityListAdapter extends RecyclerView.Adapter {
         return mList == null ? 0 : mList.size();
     }
 
+    public interface OnClickItemListener {
+        void onClick(View v, int position);
+    }
+
+    public OnClickItemListener mOnClickItemListener;
+
+    public void setOnClickItemListener(OnClickItemListener onClickItemListener) {
+        mOnClickItemListener = onClickItemListener;
+    }
+
     class Holder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_title)
         TextView mTvTitle;
@@ -60,6 +71,9 @@ public class CityListAdapter extends RecyclerView.Adapter {
         public Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(view ->
+                    mOnClickItemListener.onClick(view, getAdapterPosition())
+            );
         }
 
         public void setTvTitle(String text) {

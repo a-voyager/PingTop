@@ -60,6 +60,7 @@ public class CityChoiceActivity extends BaseActivity implements ICityChoiceView 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRvCity.setLayoutManager(new LinearLayoutManager(this));
         mCityChoicePresenter.onCreate(savedInstanceState);
+        mRvCity.setClickable(true);
     }
 
     @Override
@@ -101,8 +102,18 @@ public class CityChoiceActivity extends BaseActivity implements ICityChoiceView 
     }
 
     @Override
+    public void scroll2Position(int i) {
+        mRvCity.smoothScrollToPosition(0);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        mCityChoicePresenter.onBackPressed();
     }
 }

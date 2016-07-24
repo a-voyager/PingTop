@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<com.balysv.materialripple.MaterialRippleLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    app:contentPadding="10dp">
+    app:mrl_rippleColor="@color/colorPrimary"
+    app:mrl_rippleOverlay="true">
 
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/Base.TextAppearance.AppCompat.Large"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        tools:text="测试"/>
+        android:clickable="true"
+        app:contentPadding="10dp">
 
-</android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            tools:text="测试"/>
+
+    </android.support.v7.widget.CardView>
+</com.balysv.materialripple.MaterialRippleLayout>

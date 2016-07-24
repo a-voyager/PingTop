@@ -16,4 +16,6 @@ public interface ICityChoiceView extends IView {
     void refreshAdapter();
 
     void setToolBarTitle(String s);
+
+    void scroll2Position(int i);
 }

@@ -131,6 +131,12 @@ public class MainActivity extends BaseActivity implements IMainView, ZoneFragmen
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeCity(String newCityName) {
+        showSnackBarMsg(newCityName);
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
