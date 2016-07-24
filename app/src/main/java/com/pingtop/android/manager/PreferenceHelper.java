@@ -8,7 +8,7 @@ import com.pingtop.android.utils.PreferenceUtils;
 /**
  * Created by wuhaojie on 2016/7/21 21:44.
  */
-class PreferenceHelper {
+public class PreferenceHelper {
     public static final String KEY_TOKEN = "token";
     private PreferenceUtils mPreferenceUtils;
 

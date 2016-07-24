@@ -15,7 +15,7 @@ import java.io.InputStream;
 /**
  * Created by wuhaojie on 2016/7/23 23:07.
  */
-class DataBaseProvider {
+public class DataBaseProvider {
 
     private static final int CITY_DB = R.raw.china_city;
     public static final String CITY_DB_FILE_NAME = "china_city.db";
