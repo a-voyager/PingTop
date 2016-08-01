@@ -2,6 +2,7 @@ package com.pingtop.android.base;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.pingtop.android.injector.component.AppComponent;
 import com.pingtop.android.injector.component.DaggerAppComponent;
 import com.pingtop.android.injector.interfaces.IConfigInjector;
@@ -20,6 +21,7 @@ public class BaseApplication extends Application implements IConfigInjector {
     public void onCreate() {
         super.onCreate();
         initializeInjector();
+        Fresco.initialize(this);
     }
 
     @Override

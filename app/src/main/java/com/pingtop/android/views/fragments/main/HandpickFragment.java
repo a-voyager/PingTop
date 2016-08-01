@@ -11,13 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pingtop.android.R;
-import com.pingtop.android.adapter.list.CityListAdapter;
+import com.pingtop.android.adapter.list.HandPickListAdapter;
 import com.pingtop.android.entities.response.GudienceResponse;
 import com.pingtop.android.manager.DataManager;
 import com.pingtop.android.manager.HttpHelper;
 import com.pingtop.android.utils.SnackBarUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,8 +44,7 @@ public class HandpickFragment extends Fragment implements SwipeRefreshLayout.OnR
         ButterKnife.bind(this, view);
         mRefreshHandPicks.setOnRefreshListener(this);
         mRvHandPicks.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvHandPicks.setAdapter(new CityListAdapter(getContext(),
-                Arrays.asList(new String[]{"1"})));
+        mRvHandPicks.setAdapter(new HandPickListAdapter(getContext()));
 //        SwipeRefreshLayout indicator does not appear when the setRefreshing(true) is called before the SwipeRefreshLayout.onMeasure()
 //        http://stackoverflow.com/questions/26858692/swiperefreshlayout-setrefreshing-not-showing-indicator-initially
         mRefreshHandPicks.postDelayed(() -> {
