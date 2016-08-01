@@ -108,7 +108,7 @@ public class CityChoicePresenter implements IPresenter {
                 .doOnTerminate(new Action0() {
                     @Override
                     public void call() {
-                        mCityChoiceView.hideProgressBar();
+//                        mCityChoiceView.hideProgressBar();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -117,12 +117,14 @@ public class CityChoicePresenter implements IPresenter {
                 .subscribe(new Subscriber<List<String>>() {
                     @Override
                     public void onCompleted() {
+                        mCityChoiceView.hideProgressBar();
                         mCityListAdapter.notifyDataSetChanged();
                         mCurrState = STATE.PROVINCE;
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        mCityChoiceView.hideProgressBar();
                         e.printStackTrace();
                     }
 
@@ -166,7 +168,7 @@ public class CityChoicePresenter implements IPresenter {
                 .doOnTerminate(new Action0() {
                     @Override
                     public void call() {
-                        mCityChoiceView.hideProgressBar();
+//                        mCityChoiceView.hideProgressBar();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -175,6 +177,7 @@ public class CityChoicePresenter implements IPresenter {
                 .subscribe(new Subscriber<List<String>>() {
                     @Override
                     public void onCompleted() {
+                        mCityChoiceView.hideProgressBar();
                         mCurrState = STATE.CITY;
                         mCityListAdapter.notifyDataSetChanged();
                         mCityChoiceView.scroll2Position(0);
@@ -182,7 +185,7 @@ public class CityChoicePresenter implements IPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mCityChoiceView.hideProgressBar();
                     }
 
                     @Override
