@@ -61,7 +61,9 @@ public class HandpickFragment extends Fragment implements SwipeRefreshLayout.OnR
     public void onRefresh() {
         if (mHttpHelper == null)
             mHttpHelper = DataManager.getHttpHelper();
-        mHttpHelper.getHandPicks("", 1, 2, new Subscriber<List<GudienceResponse>>() {
+        String token = DataManager.getPreferenceHelper(getContext()).getToken();
+        long nowTime = System.currentTimeMillis();
+        mHttpHelper.getHandPicks(token, mLastTime, nowTime, new Subscriber<List<GudienceResponse>>() {
             @Override
             public void onCompleted() {
                 mRefreshHandPicks.setRefreshing(false);
@@ -79,6 +81,7 @@ public class HandpickFragment extends Fragment implements SwipeRefreshLayout.OnR
             @Override
             public void onNext(List<GudienceResponse> gudienceResponses) {
                 SnackBarUtils.show(getActivity(), gudienceResponses.toString());
+                // TODO: 2016/8/1 插入新数据
             }
         });
     }

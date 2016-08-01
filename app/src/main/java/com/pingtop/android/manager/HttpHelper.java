@@ -1,5 +1,7 @@
 package com.pingtop.android.manager;
 
+import android.support.annotation.NonNull;
+
 import com.pingtop.android.api.ApiService;
 import com.pingtop.android.entities.response.GudienceResponse;
 import com.pingtop.android.entities.response.RegisterResponse;
@@ -49,5 +51,14 @@ public class HttpHelper {
                 .unsubscribeOn(Schedulers.io())
                 .subscribe(subscriber);
     }
+
+    public void getToken(@NonNull String userName, Subscriber<RegisterResponse> subscriber) {
+        mApiService.getToken(userName)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribe(subscriber);
+    }
+
 
 }

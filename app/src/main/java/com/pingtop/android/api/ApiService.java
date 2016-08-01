@@ -20,4 +20,7 @@ public interface ApiService {
     @POST("/view/GetGudienceList")
     Observable<List<GudienceResponse>> getHandPicks(@Query("tokenStr") String token, @Query("aTimeStamp") long startTime, @Query("bTimeStamp") long endTime);
 
+    @POST("/UserHandle/GetToken")
+    Observable<RegisterResponse> getToken(@Query("username") String userName);
+
 }
