@@ -21,4 +21,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="hand_pick_refresh_complete">刷新完成</string>
+    <string name="hand_pick_refresh_error">刷新失败</string>
 </resources>

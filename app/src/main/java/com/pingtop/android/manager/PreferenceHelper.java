@@ -1,6 +1,7 @@
 package com.pingtop.android.manager;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.pingtop.android.utils.PreferenceUtils;
@@ -23,6 +24,10 @@ public class PreferenceHelper {
 
     public String getToken() {
         return mPreferenceUtils.getStringParam(KEY_TOKEN);
+    }
+
+    public void saveToken(@NonNull String token) {
+        mPreferenceUtils.saveParam(KEY_TOKEN, token);
     }
 
 }

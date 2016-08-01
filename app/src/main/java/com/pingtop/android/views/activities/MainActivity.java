@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity implements IMainView, ZoneFragmen
         mMainPresenter.initPageData();
         mTabMain.setupWithViewPager(mViewPager);
         EventBus.getDefault().register(this);
+        mMainPresenter.onCreate(savedInstanceState);
     }
 
     @Override

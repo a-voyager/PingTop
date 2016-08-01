@@ -1,7 +1,10 @@
 package com.pingtop.android.manager;
 
 import com.pingtop.android.api.ApiService;
+import com.pingtop.android.entities.response.GudienceResponse;
 import com.pingtop.android.entities.response.RegisterResponse;
+
+import java.util.List;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -31,7 +34,16 @@ public class HttpHelper {
     }
 
     public void register(String name, String pwd, Subscriber<RegisterResponse> subscriber) {
-        mApiService.registe(name, pwd)
+        mApiService.register(name, pwd)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribe(subscriber);
+    }
+
+
+    public void getHandPicks(String token, long startTime, long endTime, Subscriber<List<GudienceResponse>> subscriber) {
+        mApiService.getHandPicks(token, startTime, endTime)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
