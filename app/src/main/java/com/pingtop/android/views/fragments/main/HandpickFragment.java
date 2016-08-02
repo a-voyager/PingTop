@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +30,17 @@ import rx.Subscriber;
 public class HandpickFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
 
+    public static final String TAG = "HandpickFragment";
     @BindView(R.id.rv_hand_picks)
     RecyclerView mRvHandPicks;
     @BindView(R.id.refresh_hand_picks)
     SwipeRefreshLayout mRefreshHandPicks;
     private HttpHelper mHttpHelper;
     private long mLastTime;
+    /**
+     * 防止多次刷新
+     */
+    private boolean isFirst = true;
 
 
     @Override
@@ -45,12 +51,15 @@ public class HandpickFragment extends Fragment implements SwipeRefreshLayout.OnR
         mRefreshHandPicks.setOnRefreshListener(this);
         mRvHandPicks.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvHandPicks.setAdapter(new HandPickListAdapter(getContext()));
+        if (isFirst) {
 //        SwipeRefreshLayout indicator does not appear when the setRefreshing(true) is called before the SwipeRefreshLayout.onMeasure()
 //        http://stackoverflow.com/questions/26858692/swiperefreshlayout-setrefreshing-not-showing-indicator-initially
-        mRefreshHandPicks.postDelayed(() -> {
-            mRefreshHandPicks.setRefreshing(true);
-            onRefresh();
-        }, 500);
+            mRefreshHandPicks.postDelayed(() -> {
+                mRefreshHandPicks.setRefreshing(true);
+                onRefresh();
+                isFirst = false;
+            }, 500);
+        }
         return view;
     }
 
@@ -61,6 +70,7 @@ public class HandpickFragment extends Fragment implements SwipeRefreshLayout.OnR
             mHttpHelper = DataManager.getHttpHelper();
         String token = DataManager.getPreferenceHelper(getContext()).getToken();
         long nowTime = System.currentTimeMillis();
+        Log.d(TAG, "token = " + token);
         mHttpHelper.getHandPicks(token, mLastTime, nowTime, new Subscriber<List<GudienceResponse>>() {
             @Override
             public void onCompleted() {
@@ -79,6 +89,7 @@ public class HandpickFragment extends Fragment implements SwipeRefreshLayout.OnR
             @Override
             public void onNext(List<GudienceResponse> gudienceResponses) {
                 SnackBarUtils.show(getActivity(), gudienceResponses.toString());
+                Log.d(TAG, "Responses = " + gudienceResponses.toString());
                 // TODO: 2016/8/1 插入新数据
             }
         });

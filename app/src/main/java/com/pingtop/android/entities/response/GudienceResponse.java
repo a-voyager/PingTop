@@ -48,4 +48,14 @@ public class GudienceResponse {
     public void setText(String text) {
         this.text = text;
     }
+
+    @Override
+    public String toString() {
+        return "GudienceResponse{" +
+                "timeStamp='" + timeStamp + '\'' +
+                ", title='" + title + '\'' +
+                ", backgroundPath='" + backgroundPath + '\'' +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

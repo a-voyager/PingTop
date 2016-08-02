@@ -17,7 +17,7 @@ public interface ApiService {
     @POST("/UserHandle/SingUp")
     Observable<RegisterResponse> register(@Query("username") String name, @Query("password") String pwd);
 
-    @POST("/view/GetGudienceList")
+    @POST("/View/GetGudienceList")
     Observable<List<GudienceResponse>> getHandPicks(@Query("tokenStr") String token, @Query("aTimeStamp") long startTime, @Query("bTimeStamp") long endTime);
 
     @POST("/UserHandle/GetToken")
