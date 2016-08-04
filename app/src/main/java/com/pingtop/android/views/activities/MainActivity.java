@@ -3,6 +3,7 @@ package com.pingtop.android.views.activities;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
@@ -159,5 +160,12 @@ public class MainActivity extends BaseActivity implements IMainView, ZoneFragmen
     public boolean onOptionsItemSelected(MenuItem item) {
         mMainPresenter.onOptionsItemSelected(item);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        mMainPresenter.onNewIntent(intent);
     }
 }

@@ -1,8 +1,10 @@
 package com.pingtop.android.presenter.impl;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -30,6 +32,7 @@ import javax.inject.Inject;
  */
 public class MainPresenter implements IPresenter {
 
+    public static final String TAG = "MainPresenter";
     private Context mContext;
     private IMainView mIMainView;
 
@@ -116,6 +119,15 @@ public class MainPresenter implements IPresenter {
                 Intent settingsIntent = new Intent(mContext, SettingsActivity.class);
                 mContext.startActivity(settingsIntent);
                 break;
+        }
+    }
+
+    public void onNewIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String text = intent.getStringExtra(SearchManager.QUERY);
+            Log.d(TAG, "query text = " + text);
+            mIMainView.showSnackBarMsg(text);
+            // TODO: 2016/8/5 处理搜索
         }
     }
 }
