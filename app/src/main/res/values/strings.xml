@@ -25,4 +25,5 @@
     <string name="hand_pick_refresh_error">刷新失败</string>
     <string name="btn_log_out">退出登录</string>
     <string name="settings">设置</string>
+    <string name="search_hint">搜索旅游景点</string>
 </resources>
