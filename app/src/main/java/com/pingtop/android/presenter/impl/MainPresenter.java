@@ -18,6 +18,7 @@ import com.pingtop.android.presenter.IPresenter;
 import com.pingtop.android.views.activities.CityChoiceActivity;
 import com.pingtop.android.views.activities.LoginActivity;
 import com.pingtop.android.views.activities.MainActivity;
+import com.pingtop.android.views.activities.SettingsActivity;
 
 import java.util.List;
 
@@ -110,6 +111,10 @@ public class MainPresenter implements IPresenter {
                 mContext.startActivity(intent);
                 break;
             case R.id.action_search:
+                break;
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(mContext, SettingsActivity.class);
+                mContext.startActivity(settingsIntent);
                 break;
         }
     }

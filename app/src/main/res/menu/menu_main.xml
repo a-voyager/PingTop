@@ -14,4 +14,10 @@
         android:orderInCategory="100"
         android:title="城市"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/btn_settings"
+        android:orderInCategory="100"
+        android:title="设置"
+        app:showAsAction="ifRoom"/>
 </menu>
