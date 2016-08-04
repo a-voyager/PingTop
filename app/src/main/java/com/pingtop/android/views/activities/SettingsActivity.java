@@ -2,6 +2,7 @@ package com.pingtop.android.views.activities;
 
 import android.os.Bundle;
 import android.support.annotation.StringRes;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.pingtop.android.R;
@@ -33,7 +34,17 @@ public class SettingsActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.settings);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         mLvSettings.setAdapter(new SettingsListAdapter(this));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
