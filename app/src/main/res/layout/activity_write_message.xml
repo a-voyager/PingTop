@@ -95,10 +95,11 @@
                 android:text="@string/write_sync_where"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"/>
 
-
             <CheckBox
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
+                android:layout_height="24dp"
+                android:background="@drawable/cb_qq"
+                android:button="@null"/>
 
         </LinearLayout>
 
