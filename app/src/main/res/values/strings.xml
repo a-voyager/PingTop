@@ -26,4 +26,6 @@
     <string name="btn_log_out">退出登录</string>
     <string name="settings">设置</string>
     <string name="search_hint">搜索旅游景点</string>
+    <string name="write_where">旅行地</string>
+    <string name="write_sync_where">同步到</string>
 </resources>
