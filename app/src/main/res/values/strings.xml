@@ -28,4 +28,5 @@
     <string name="search_hint">搜索旅游景点</string>
     <string name="write_where">旅行地</string>
     <string name="write_sync_where">同步到</string>
+    <string name="write_msg_title">留动态</string>
 </resources>

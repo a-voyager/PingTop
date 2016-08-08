@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_write"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,6 +20,7 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <EditText
+            android:id="@+id/content_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -40,35 +42,40 @@
             android:layout_height="1dp"
             android:background="@color/gray"/>
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:minHeight="?android:attr/listPreferredItemHeightSmall"
-                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-                android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
-                android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-                android:text="@string/write_where"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"/>
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="12dp"
-                android:scaleType="center"
-                android:src="@drawable/btn_next_normal"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                    android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+                    android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+                    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                    android:text="@string/write_where"
+                    android:textAppearance="?android:attr/textAppearanceListItemSmall"/>
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12dp"
+                    android:scaleType="center"
+                    android:src="@drawable/btn_next_normal"/>
+
+            </LinearLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
         <View
             android:layout_width="match_parent"
@@ -96,9 +103,24 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"/>
 
             <CheckBox
+                android:id="@+id/cb_qq"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:background="@drawable/cb_qq"
+                android:button="@null"/>
+
+            <CheckBox
+                android:id="@+id/cb_weixin"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/cb_weixin"
+                android:button="@null"/>
+
+            <CheckBox
+                android:id="@+id/cb_weibo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/cb_weibo"
                 android:button="@null"/>
 
         </LinearLayout>
