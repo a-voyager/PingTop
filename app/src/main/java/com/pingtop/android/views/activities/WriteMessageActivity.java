@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.pingtop.android.R;
+import com.pingtop.android.adapter.grid.WriteGirdImgAdapter;
 import com.pingtop.android.base.BaseActivity;
 import com.pingtop.android.base.BaseApplication;
 import com.pingtop.android.injector.component.ActivityComponent;
@@ -45,6 +46,7 @@ public class WriteMessageActivity extends BaseActivity implements IWriteView {
     @BindView(R.id.ll_write)
     LinearLayout mLlWrite;
     private InputMethodManager mImm;
+    private WriteGirdImgAdapter mWriteGirdImgAdapter;
 
     @Override
     protected void initializePresenter() {
@@ -71,6 +73,9 @@ public class WriteMessageActivity extends BaseActivity implements IWriteView {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         mWritePresenter.onCreate(savedInstanceState);
+        mWriteGirdImgAdapter = new WriteGirdImgAdapter(this);
+        mGvImg.setAdapter(mWriteGirdImgAdapter);
+        mGvImg.setOnItemClickListener((adapterView, view, i, l) -> mWritePresenter.onItemClick(adapterView, view, i, l));
     }
 
     @Override
@@ -142,6 +147,11 @@ public class WriteMessageActivity extends BaseActivity implements IWriteView {
         if (mImm == null)
             mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mImm.hideSoftInputFromWindow(mContentText.getWindowToken(), 0);
+    }
+
+    @Override
+    public int getImageListSize() {
+        return mWriteGirdImgAdapter == null ? 0 : mWriteGirdImgAdapter.getListSize();
     }
 
 }

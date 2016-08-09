@@ -23,4 +23,6 @@ public interface IWriteView extends IView {
     boolean checkNotNull();
 
     void hideKeyboard();
+
+    int getImageListSize();
 }

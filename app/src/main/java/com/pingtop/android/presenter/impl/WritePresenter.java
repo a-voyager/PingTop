@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.pingtop.android.R;
 import com.pingtop.android.base.IView;
@@ -95,5 +97,13 @@ public class WritePresenter implements IPresenter {
 
 //        ((Activity)mContext).finish();
 
+    }
+
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        int size = mIWriteView.getImageListSize();
+        if (size == i) {
+            mIWriteView.showSnackBarMsg("跳转至图片选择界面");
+            // TODO: 2016/8/9
+        }
     }
 }
