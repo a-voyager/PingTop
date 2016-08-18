@@ -6,5 +6,8 @@
 
 
     <color name="gray">#BBB</color>
+    <color name="community_item_content">#FF000000</color>
+    <color name="community_item_text_flag">#ee3c3c</color>
+    <color name="community_item_user">#000</color>
 
 </resources>
