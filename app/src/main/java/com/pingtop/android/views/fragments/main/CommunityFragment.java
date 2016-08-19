@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.pingtop.android.R;
+import com.pingtop.android.adapter.list.CommunityAdapter;
 import com.pingtop.android.views.activities.WriteMessageActivity;
 
 import butterknife.BindView;
@@ -26,6 +28,7 @@ public class CommunityFragment extends Fragment implements View.OnClickListener 
     FloatingActionButton mFab;
     @BindView(R.id.rv_community)
     RecyclerView mRvCommunity;
+    private CommunityAdapter mCommunityAdapter;
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -39,6 +42,10 @@ public class CommunityFragment extends Fragment implements View.OnClickListener 
         View view = inflater.inflate(R.layout.fragment_community, container, false);
         ButterKnife.bind(this, view);
         mFab.setOnClickListener(this);
+        if (mCommunityAdapter == null)
+            mCommunityAdapter = new CommunityAdapter(getActivity());
+        mRvCommunity.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRvCommunity.setAdapter(mCommunityAdapter);
         return view;
     }
 

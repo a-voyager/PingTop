@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.pingtop.android.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wuhaojie on 2016/8/18 12:27.
  */
@@ -19,10 +22,29 @@ public class CommunityAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private final LayoutInflater mLayoutInflater;
 
+    private List<Item> mItems = new ArrayList<>();
+
+    static class Item {
+
+    }
+
+    public CommunityAdapter(Context context, List<Item> items) {
+        this(context);
+        mItems = items;
+    }
+
     public CommunityAdapter(Context context) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
+
+    {
+        mItems.add(new Item());
+        mItems.add(new Item());
+        mItems.add(new Item());
+        mItems.add(new Item());
+    }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +60,7 @@ public class CommunityAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mItems.size();
     }
 
     static class Holder extends RecyclerView.ViewHolder {
