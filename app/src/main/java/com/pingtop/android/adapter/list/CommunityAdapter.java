@@ -28,6 +28,11 @@ public class CommunityAdapter extends RecyclerView.Adapter {
 
     }
 
+    public void addItem(Item item) {
+        mItems.add(0, item);
+        notifyItemInserted(0);
+    }
+
     public CommunityAdapter(Context context, List<Item> items) {
         this(context);
         mItems = items;
